@@ -1,3 +1,6 @@
 # Project exclude paths
 /out/
 /.idea/
+
+# my secrets >:) not for your eyes
+DiscordBotToken.txt

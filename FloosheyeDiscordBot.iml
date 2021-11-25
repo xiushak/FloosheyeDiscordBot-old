@@ -7,5 +7,21 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/opencv/opencv-453.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/javacord-3.3.2-shaded.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <NATIVE>
+          <root url="file://$MODULE_DIR$/lib/opencv/x64" />
+        </NATIVE>
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/opencv/opencv-453.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/opencv/opencv-453.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
