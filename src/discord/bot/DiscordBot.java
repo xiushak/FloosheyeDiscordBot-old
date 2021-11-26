@@ -2,6 +2,8 @@ package discord.bot;
 
 import discord.bot.commands.CheckOnlineCommand;
 import discord.bot.commands.FisheyeAttachedImageCommand;
+import discord.bot.commands.HelpCommand;
+import discord.bot.commands.RandomFisheyeImageCommand;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
@@ -19,10 +21,16 @@ public class DiscordBot {
         DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
 
         // check if bot is online
+        api.addMessageCreateListener(new HelpCommand());
+
+        // check if bot is online
         api.addMessageCreateListener(new CheckOnlineCommand());
 
         // fisheyes an image with face recognition when image and fish
         api.addMessageCreateListener(new FisheyeAttachedImageCommand());
+
+        // randomly fisheyes images sent regardless of text
+        api.addMessageCreateListener(new RandomFisheyeImageCommand());
 
         // Print the invite url of your bot
         System.out.println("Invite link: " + api.createBotInvite());
