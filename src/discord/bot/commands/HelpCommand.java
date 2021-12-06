@@ -10,9 +10,11 @@ public class HelpCommand implements MessageCreateListener {
         String message = event.getMessageContent();
         if (message.equalsIgnoreCase("fish help")) {
             new MessageBuilder()
-                    .append("Chance of applying the fisheye effect on an image sent while the bot is online")
+                    .append("- Chance of applying the fisheye effect on an image sent while the bot is online! (50% chance)\n")
+                    .append("- Use \'fish?\' to check if the bot is online\n")
+                    .append("- Upload an image attached to a message saying \'fish\' to force apply the fisheye filter\n")
+                    .append("- Upload an image attached to a message saying \'brain\' to force apply the big-brain filter\n")
                     .send(event.getChannel());
         }
-
     }
 }
