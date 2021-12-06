@@ -1,5 +1,6 @@
 package discord.bot.commands;
 
+import model.FaceRecognitionBigBrainModel;
 import model.FaceRecognitionFishEyeModel;
 import model.SimpleModel;
 import org.javacord.api.entity.message.Message;
@@ -43,18 +44,23 @@ public class RandomFisheyeImageCommand implements MessageCreateListener {
                 try {
                     BufferedImage image = attachment.downloadAsImage().join();
                     String name = attachment.getFileName();
-                    SimpleModel model = new FaceRecognitionFishEyeModel();
+                    SimpleModel model;
+                    if (r.nextInt(2) != 0) {
+                        model = new FaceRecognitionFishEyeModel();
+                    } else {
+                        model = new FaceRecognitionBigBrainModel();
+                    }
                     SimpleView view = new BasicJPGView(model);
                     model.setImage(image);
                     model.processImage(0, 0);
                     view.outputImage("discordImages/" + name);
 
-                    String[] fisheye = {"YOUR IMAGE IS FISHEYED! NOT SAFE TO SEND IT HERE HAHAHAA",
-                            "SUcks to suck, enjoy the schnozzle!",
+                    String[] messages = {"GOTTEM! NOT SAFE TO SEND IT HERE HAHAHAA",
+                            "SUcks to suck, enjoy!",
                             "whoops, missclicked ;)",
                             ":levitate:"};
                     new MessageBuilder()
-                            .append(fisheye[r.nextInt(fisheye.length)])
+                            .append(messages[r.nextInt(messages.length)])
                             .addAttachment(new File("discordImages/" + name))
                             .send(event.getChannel());
 

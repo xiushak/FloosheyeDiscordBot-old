@@ -18,7 +18,7 @@ public class DiscordBot {
         DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
 
         // check if bot is online
-//        api.addMessageCreateListener(new HelpCommand());
+        api.addMessageCreateListener(new HelpCommand());
 
         // check if bot is online
         api.addMessageCreateListener(new CheckOnlineCommand());
