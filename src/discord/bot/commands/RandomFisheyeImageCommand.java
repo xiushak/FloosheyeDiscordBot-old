@@ -23,7 +23,7 @@ public class RandomFisheyeImageCommand implements MessageCreateListener {
     public void onMessageCreate(MessageCreateEvent event) {
         Message message = event.getMessage();
         String content = message.getContent();
-        if (content.equalsIgnoreCase("fish")) {
+        if (content.equalsIgnoreCase("fish") || content.equalsIgnoreCase("brain")) {
             return;
         }
         for (MessageAttachment attachment : message.getAttachments()) {
@@ -51,7 +51,8 @@ public class RandomFisheyeImageCommand implements MessageCreateListener {
 
                     String[] fisheye = {"YOUR IMAGE IS FISHEYED! NOT SAFE TO SEND IT HERE HAHAHAA",
                             "SUcks to suck, enjoy the schnozzle!",
-                            "whoops, missclicked ;)"};
+                            "whoops, missclicked ;)",
+                            ":levitate:"};
                     new MessageBuilder()
                             .append(fisheye[r.nextInt(fisheye.length)])
                             .addAttachment(new File("discordImages/" + name))
@@ -59,7 +60,6 @@ public class RandomFisheyeImageCommand implements MessageCreateListener {
 
                     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
                     scheduler.scheduleAtFixedRate(() -> new File("discordImages/" + name).delete(), 1, 3L, TimeUnit.SECONDS);
-//                    new File("discordImages/" + name).delete();
                     System.out.println("Image fisheyed");
                 } catch (IOException | IllegalArgumentException e) {
                     event.getChannel().sendMessage("image failed to fisheye :(");

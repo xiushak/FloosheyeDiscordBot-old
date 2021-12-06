@@ -1,6 +1,6 @@
 package discord.bot.commands;
 
-import model.FaceRecognitionFishEyeModel;
+import model.FaceRecognitionBigBrainModel;
 import model.SimpleModel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAttachment;
@@ -18,25 +18,25 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class FisheyeAttachedImageCommand implements MessageCreateListener {
+public class BigBrainCommand implements MessageCreateListener {
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
         Message message = event.getMessage();
         String content = message.getContent();
-        if (content.equalsIgnoreCase("fish")) {
+        if (content.equalsIgnoreCase("brain")) {
             for (MessageAttachment attachment : message.getAttachments()) {
                 if (!event.getMessageAuthor().isBotUser() && attachment.isImage()) {
                     System.out.println("Image detected!");
                     try {
                         BufferedImage image = attachment.downloadAsImage().join();
                         String name = attachment.getFileName();
-                        SimpleModel model = new FaceRecognitionFishEyeModel();
+                        SimpleModel model = new FaceRecognitionBigBrainModel();
                         SimpleView view = new BasicJPGView(model);
                         model.setImage(image);
                         model.processImage(0, 0);
                         view.outputImage("discordImages/" + name);
 
-                        String[] fisheye = {"you asked for it"};
+                        String[] fisheye = {"brainiac"};
                         Random r = new Random();
                         new MessageBuilder()
                                 .append(fisheye[r.nextInt(fisheye.length)])
@@ -45,9 +45,9 @@ public class FisheyeAttachedImageCommand implements MessageCreateListener {
 
                         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
                         scheduler.scheduleAtFixedRate(() -> new File("discordImages/" + name).delete(), 1, 3L, TimeUnit.SECONDS);
-                        System.out.println("Image fisheyed by command");
+                        System.out.println("Image brained by command");
                     } catch (IOException | IllegalArgumentException e) {
-                        event.getChannel().sendMessage("image failed to fisheye :(");
+                        event.getChannel().sendMessage("can't become big brained...");
                     }
                 }
             }
